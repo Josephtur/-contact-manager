@@ -1,0 +1,63 @@
+<!-- FORMULARIO REACTIVO: usamos [formGroup] para vincular el formulario de Angular -->
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <!-- Fila de inputs -->
+  <div class="form-row">
+
+    <!-- Grupo: Nombre -->
+    <div class="form-group">
+      <label for="name">Nombre</label>
+      <!-- Campo de texto con PrimeNG, conectado al control 'name' del formulario -->
+      <input id="name" pInputText formControlName="name" />
+      
+      <!-- Validación: solo se muestra si el campo es inválido y ya fue tocado -->
+      <small *ngIf="form.controls.name.invalid && form.controls.name.touched"
+             class="p-error">
+        Nombre obligatorio
+      </small>
+    </div>
+
+    <!-- Grupo: Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" pInputText formControlName="email" />
+      <small *ngIf="form.controls.email.invalid && form.controls.email.touched"
+             class="p-error">
+        Email inválido
+      </small>
+    </div>
+
+    <!-- Grupo: Teléfono -->
+    <div class="form-group">
+      <label for="phone">Teléfono</label>
+      <input id="phone" pInputText formControlName="phone" />
+      <small *ngIf="form.controls.phone.invalid && form.controls.phone.touched"
+             class="p-error">
+        Teléfono obligatorio
+      </small>
+    </div>
+
+  </div>
+
+  <!-- Botones al final del formulario -->
+  <div class="form-row" style="justify-content: flex-end;">
+
+    <!-- Botón para cancelar la edición/creación -->
+    <button pButton type="button" label="Cancelar"
+            class="p-button-text p-button-secondary p-mr-2"
+            (click)="onCancel()"></button>
+
+    <!-- Botón para enviar el formulario -->
+     <!-- El texto del botón cambia si estamos editando o creando -->
+      <!-- El ícono también cambia -->
+       <!-- Deshabilitado si el formulario no es válido -->
+    <button pButton type="submit"
+            [label]="form.get('id')!.value ? 'Modificar' : 'Crear'"   
+            [icon]="form.get('id')!.value ? 'pi pi-pencil' : 'pi pi-plus'" 
+            class="p-button-primary"
+            [disabled]="form.invalid"> 
+    </button>
+
+  </div>
+</form>
+

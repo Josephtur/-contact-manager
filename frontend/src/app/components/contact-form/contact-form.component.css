@@ -1,0 +1,17 @@
+:host { display: block; margin-bottom: 1rem; }
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.form-group {
+  flex: 1 1 250px; /* mínimo 250px, se adapta */
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}

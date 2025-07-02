@@ -1,0 +1,27 @@
+/* Contenedor raíz del componente, ocupa toda la altura de la ventana y evita scroll global */
+:host {
+  display: flex;                 /* Flex container para distribuir header, main y footer en columna */
+  flex-direction: column;        /* Dirección de los hijos en columna */
+  height: 100vh;                 /* Altura total de la ventana del navegador */
+  overflow: hidden;              /* Evita scroll en el componente completo */
+}
+
+/* Área principal entre header y footer */
+.main-content {
+  flex: 1;                       /* Ocupa el espacio restante entre header y footer */
+  display: flex;                 /* Contenedor flex para centrar contenido */
+  justify-content: center;       /* Centra horizontalmente los hijos */
+  align-items: flex-start;       /* Alinea los hijos al inicio vertical (parte superior) */
+  padding: 1rem;                 /* Espacio interno alrededor del contenido */
+  background-color: var(--bg-page); /* Color de fondo definido por la variable CSS */
+  overflow: hidden;              /* Evita scroll interno en el área principal */
+}
+
+/* Wrapper específico para el chat dentro del main content */
+.chat-wrapper {
+  display: flex;                 /* Contenedor flex para organizar sus hijos en columna */
+  flex-direction: column;        /* Dirección de los hijos en columna */
+  width: 100%;                   /* Ancho total disponible en su contenedor */
+  max-width: 600px;              /* Ancho máximo para limitar el chat en pantallas grandes */
+  height: 100%;                  /* Altura completa disponible del main-content */
+}

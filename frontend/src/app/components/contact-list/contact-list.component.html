@@ -1,0 +1,56 @@
+<!-- Si NO se está editando un contacto, muestra el botón "Nuevo Contacto" -->
+<div class="mb-3" *ngIf="!editing()">
+  <!-- Botón de PrimeNG con icono de usuario y clase de éxito (verde) -->
+  <!-- Texto del botón -->
+   <!-- Icono de PrimeIcons -->
+    <!-- Clase para estilo verde -->
+     <!-- Evento al hacer clic -->
+  <button pButton
+          label="Nuevo Contacto" 
+          icon="pi pi-user-plus" 
+          class="p-button-success" 
+          (click)="newContact()"> 
+  </button>
+</div>
+
+<!-- Si se está editando (editing() devuelve un objeto o valor verdadero), muestra el formulario -->
+ <!-- Solo se muestra si hay un contacto en edición -->
+  <!-- Se pasa el contacto actual en edición como input al formulario -->
+   <!-- Evento cuando se crea un contacto nuevo -->
+    <!-- Evento cuando se actualiza un contacto existente -->
+     <!-- Evento cuando se cancela la edición -->
+<app-contact-form
+  *ngIf="editing()" 
+  [editContact]="editing()" 
+  (created)="onSaved()"     
+  (updated)="onSaved()"     
+  (canceled)="onSaved()">   
+</app-contact-form>
+
+<!-- Tabla de PrimeNG para mostrar los contactos -->
+<p-table [value]="contacts()" [paginator]="true" [rows]="10" class="p-datatable-sm">
+  <!-- Encabezado de la tabla -->
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th><th>Email</th><th>Teléfono</th><th>Acciones</th>
+    </tr>
+  </ng-template>
+
+  <!-- Cuerpo de la tabla, itera sobre cada contacto 'c' -->
+  <ng-template pTemplate="body" let-c>
+    <tr>
+      <td>{{c.name}}</td>   <!-- Nombre del contacto -->
+      <td>{{c.email}}</td>  <!-- Email del contacto -->
+      <td>{{c.phone}}</td>  <!-- Teléfono del contacto -->
+      <td>
+        <!-- Botón para editar el contacto -->
+        <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded p-mr-2"
+                (click)="onEdit(c)"></button>
+
+        <!-- Botón para eliminar el contacto -->
+        <button pButton icon="pi pi-trash" class="p-button-text p-button-rounded p-button-danger"
+                (click)="delete(c.id)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
